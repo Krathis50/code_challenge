@@ -1,24 +1,16 @@
-# README
+## Getting Set Up
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Clone the repository
+2. Run `bin/setup`
 
-Things you may want to cover:
+## Running the application
 
-* Ruby version
+Run `rails server`
 
-* System dependencies
+## Contributing to the Application
 
-* Configuration
+Pushes to master are disabled by default in order to prevent Git conflicts. To contribute, create a branch with your changes and when they are ready to be merged, open a pull request for the team to review. This allows the team to understand what's going on throughout the app, provide feedback to other team members, and learn. [Read here](https://help.github.com/articles/creating-a-pull-request/) to learn about creating a pull request.
 
-* Database creation
+## Running the application on the web with Heroku
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Heroku provides the ability to host a hobby Rails application for free for demo purposes. It also makes it very easy to push up your Rails application quickly and easily. To get started with Heroku, follow along with their [getting started guide](https://devcenter.heroku.com/articles/getting-started-with-rails5).
