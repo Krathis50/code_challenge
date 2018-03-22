@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+<h1>Code Challenge</h1>
+
+<%= form_tag('/home/submit') do -%>
+  <div class="form-group">
+    <label for="rubyCode">Write Ruby Code</label>
+    <%= text_area_tag 'rubyCode', nil, class: "form-control" %>
+  </div>
+  <div><%= submit_tag 'Evaluate', class: "btn btn-primary" %></div>
+<% end -%>
+

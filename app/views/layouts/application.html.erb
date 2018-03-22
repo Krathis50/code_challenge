@@ -9,6 +9,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-light bg-light">
+      <%= link_to("Home", home_index_path, class: "navebar-brand") %>
+    </nav>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>
