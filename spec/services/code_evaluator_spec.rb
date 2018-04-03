@@ -3,7 +3,7 @@ require 'rails_helper'
 describe CodeEvaluator do
   context 'when given Ruby code' do
     it 'returns the correct answer for simple arithmetic' do
-      expect(CodeEvaluator.new(:ruby, '1 + 1').evaluate).to eq(2.to_s)
+      expect(CodeEvaluator.evaluate_for(:ruby, 'puts 1 + 1')).to eq(2.to_s)
     end
 
     it 'returns the correct answer requiring a defined method' do
@@ -12,10 +12,28 @@ describe CodeEvaluator do
         2
       end
 
-      method_being_called
+      puts method_being_called
       }
 
-      expect(CodeEvaluator.new(:ruby, code).evaluate).to eq(2.to_s)
+      expect(CodeEvaluator.evaluate_for(:ruby, code)).to eq(2.to_s)
+    end
+  end
+
+  context 'when given Python code' do
+    it 'returns the correct answer for simple arithmetic' do
+      expect(CodeEvaluator.evaluate_for(:python, 'print(1 + 1)')).to eq(2.to_s)
+    end
+
+    it 'returns the correct answer requiring a defined method' do
+      skip
+      code = %q{
+      def method_being_called():
+          return 2
+
+      print(method_being_called)
+      }
+
+      expect(CodeEvaluator.evaluate_for(:python, code)).to eq(2.to_s)
     end
   end
 end

@@ -1,11 +1,9 @@
 class CodeEvaluator
-  def initialize(language, code)
-    @language = language
-    @code = code
-  end
+  EVALUATOR_CLASSES = {
+    ruby: Evaluators::RubyEvaluator,
+  }
 
-  def evaluate
-    program = `ruby -e 'method = lambda { #{ @code } }; puts method.call'`
-    program.strip
+  def self.evaluate_for(language, code)
+    EVALUATOR_CLASSES[language].new(code).evaluate
   end
 end
