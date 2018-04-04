@@ -3,8 +3,12 @@
 
 <%= form_tag('/home/submit') do -%>
   <div class="form-group">
-    <label for="rubyCode">Write Ruby Code</label>
-    <%= text_area_tag 'rubyCode', nil, class: "form-control" %>
+    <label for="language">Language</label>
+    <%= select_tag(:language, options_for_select(['ruby', 'python'])) %>
+  </div>
+  <div class="form-group">
+    <label for="code">Write Code</label>
+    <%= text_area_tag 'code', nil, class: "form-control" %>
   </div>
   <div><%= submit_tag 'Evaluate', class: "btn btn-primary" %></div>
 <% end -%>
