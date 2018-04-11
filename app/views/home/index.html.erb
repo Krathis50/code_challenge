@@ -1,3 +1,15 @@
+<style type="text/css" media="screen">
+.ace_editor {
+  border: 1px solid lightgray;
+  margin: auto;
+  height: 200px;
+  width: 80%;
+}
+  .scrollmargin {
+    height: 80px;
+    text-align: center;
+  }
+</style>
 <p id="notice"><%= notice %></p>
 <h1>Code Challenge</h1>
 
@@ -8,7 +20,8 @@
   </div>
   <div class="form-group">
     <label for="code">Write Code</label>
-    <%= text_area_tag 'code', nil, class: "form-control" %>
+    <div id="editor"></div>
+    <%= hidden_field_tag 'code', nil %>
   </div>
   <div><%= submit_tag 'Evaluate', class: "btn btn-primary" %></div>
 <% end -%>
