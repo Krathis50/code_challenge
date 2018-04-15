@@ -1,0 +1,27 @@
+<%= form_with(model: challenge, local: true) do |form| %>
+  <% if challenge.errors.any? %>
+    <div class="alert alert-secondary" id="error_explanation" role="alert">
+      <h2><%= pluralize(challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
+
+      <ul>
+      <% challenge.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :challenge_name, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :challenge_description, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
