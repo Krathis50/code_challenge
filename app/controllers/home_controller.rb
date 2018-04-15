@@ -3,8 +3,9 @@ class HomeController < ApplicationController
   end
 
   def submit
-    code = params[:rubyCode]
-    result = eval(code)
-    redirect_to root_url, notice: "The result of the code is #{ result }"
+    code = params[:code]
+    language = params[:language].to_sym
+    result = CodeEvaluator.evaluate_for(language, code)
+    redirect_to root_url, notice: "Evaluated #{ language }. The result of the code is #{ result }"
   end
 end
