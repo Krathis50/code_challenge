@@ -17,3 +17,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require prism
+//= require home
