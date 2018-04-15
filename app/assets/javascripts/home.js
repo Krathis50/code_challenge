@@ -1,6 +1,6 @@
 // Constructor for Shape objects to hold data for all drawn objects.
 // For now they will just be defined as rectangles.
-function Shape(x, y, w, h, fill) {
+function Shape(x, y, w, h, fill, whatShape) {
   // This is a very simple and unsafe constructor. All we're doing is checking if the values exist.
   // "x || 0" just means "if there is a value for x, use that. Otherwise use 0."
   // But we aren't checking anything else! We could put "Lalala" for the value of x 
@@ -9,12 +9,27 @@ function Shape(x, y, w, h, fill) {
   this.w = w || 1;
   this.h = h || 1;
   this.fill = fill || '#AAAAAA';
+  this.whatShape = whatShape || 1;
 }
+
+var selShape = 1; //select shape
 
 // Draws this shape to a given context
 Shape.prototype.draw = function(ctx) {
   ctx.fillStyle = this.fill;
-  ctx.fillRect(this.x, this.y, this.w, this.h);
+  ctx.strokeStyle = this.fill;
+  if (this.whatShape == 1) {
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    this.whatShape = 1;
+  }
+  else if (this.whatShape == 2) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.w, this.h, Math.PI * 2, true); // Outer circle
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    this.whatShape = 2;
+  }
 }
 
 // Determine if a point is inside the shape's bounds
@@ -111,7 +126,8 @@ function CanvasState(canvas) {
   // double click for making new shapes
   canvas.addEventListener('dblclick', function(e) {
     var mouse = myState.getMouse(e);
-    myState.addShape(new Shape(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)'));
+    var makeShape;
+    myState.addShape(new Shape(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)',makeShape = (selShape == 1) ? 1 : 2));
   }, true);
   
   // **** Options! ****
@@ -128,7 +144,7 @@ CanvasState.prototype.addShape = function(shape) {
 }
 
 CanvasState.prototype.clear = function() {
-  this.ctx.clearRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.width, this.height);
 }
 
 // While draw is called as often as the INTERVAL variable demands,
@@ -158,7 +174,17 @@ CanvasState.prototype.draw = function() {
       ctx.strokeStyle = this.selectionColor;
       ctx.lineWidth = this.selectionWidth;
       var mySel = this.selection;
-      ctx.strokeRect(mySel.x,mySel.y,mySel.w,mySel.h);
+      var wShape = mySel.whatShape;
+      if (wShape == 1) {
+        ctx.strokeRect(mySel.x,mySel.y,mySel.w,mySel.h);
+      }
+      else if (wShape == 2) {
+        ctx.beginPath();
+        ctx.arc(mySel.x,mySel.y,mySel.w,mySel.h, Math.PI * 2, true); // Outer circle
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+      }
     }
     
     // ** Add stuff you want drawn on top all the time here **
@@ -201,6 +227,14 @@ CanvasState.prototype.getMouse = function(e) {
 
 $(document).ready(function() {
     var s = new CanvasState(document.getElementById('canvas'));
-    console.log("I should have loaded.");
     s.addShape(new Shape(40,40,50,50)); // The default is gray
 });
+
+
+function Square() {
+  selShape = 1;
+}
+
+function Circle() {
+  selShape = 2;
+}
