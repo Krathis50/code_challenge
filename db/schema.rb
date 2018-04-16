@@ -10,17 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415191700) do
+ActiveRecord::Schema.define(version: 20180415202608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pgcrypto"
 
-  create_table "challenges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "challenges", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "problem_sets", force: :cascade do |t|
+    t.string "arguments"
+    t.string "answer"
+    t.bigint "challenge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_problem_sets_on_challenge_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +48,5 @@ ActiveRecord::Schema.define(version: 20180415191700) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "problem_sets", "challenges"
 end

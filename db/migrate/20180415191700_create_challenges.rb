@@ -1,7 +1,6 @@
 class CreateChallenges < ActiveRecord::Migration[5.1]
   def change
-    enable_extension 'pgcrypto'
-    create_table :challenges, id: :uuid do |t|
+    create_table :challenges do |t|
       t.string :name, null: false
       t.text :description, null: false
 

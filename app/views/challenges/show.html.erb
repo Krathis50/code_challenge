@@ -10,3 +10,24 @@
 
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>
+
+<h2>Problem Sets</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Problem</th>
+      <th scope="col" colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @challenge.problem_sets.each do |problem_set| %>
+      <tr>
+        <th scope="row"><%= problem_set.arguments %></th>
+        <td><%= link_to "Edit", edit_problem_set_path(problem_set) %></td>
+        <td><%= link_to 'Delete', problem_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Problem Set', new_problem_set_path(challenge_id: @challenge.id) %>

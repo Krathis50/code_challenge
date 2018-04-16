@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Arguments:</strong>
+  <%= @problem_set.arguments %>
+</p>
+
+<p>
+  <strong>Text,:</strong>
+  <%= @problem_set.text, %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @problem_set.answer %>
+</p>
+
+<p>
+  <strong>Text,:</strong>
+  <%= @problem_set.text, %>
+</p>
+
+<p>
+  <strong>Challenge:</strong>
+  <%= @problem_set.challenge %>
+</p>
+
+<%= link_to 'Edit', edit_problem_set_path(@problem_set) %> |
+<%= link_to 'Back', problem_sets_path %>
