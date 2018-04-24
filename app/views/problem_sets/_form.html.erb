@@ -1,0 +1,32 @@
+<%= form_with(model: problem_set, local: true) do |form| %>
+  <% if problem_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(problem_set.errors.count, "error") %> prohibited this problem_set from being saved:</h2>
+
+      <ul>
+      <% problem_set.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :challenge_id %>
+    <%= form.hidden_field :challenge_id, id: :problem_set_challenge_id, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :arguments %>
+    <%= form.text_field :arguments, id: :problem_set_arguments, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :answer %>
+    <%= form.text_field :answer, id: :problem_set_answer, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

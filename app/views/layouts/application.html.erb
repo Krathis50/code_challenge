@@ -9,13 +9,24 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <%= link_to("Home", home_index_path, class: "navebar-brand") %>
-    </nav>
+    <%= render "shared/navigation" %>
     <div class="container-fluid">
+      <% if alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+      <% if notice %>
+        <div class="alert alert-info" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
 <br>
@@ -29,5 +40,18 @@
 
 
 
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/ruby");
+/*
+hljs.initHighlightingOnLoad();
+hljs.configure({useBR: true});
+
+$('textarea.code').each(function(i, block) {
+  hljs.highlightBlock(block);
+});
+*/
+  </script>
   </body>
 </html>

@@ -9,7 +9,7 @@ function Shape(x, y, w, h, fill, whatShape) {
   this.w = w || 1;
   this.h = h || 1;
   this.fill = fill || '#AAAAAA';
-  this.whatShape = whatShape || 1;
+  this.whatShape = whatShape || 1; //This is responsible for detecting what shape it will draw.
 }
 
 var selShape = 1; //select shape
