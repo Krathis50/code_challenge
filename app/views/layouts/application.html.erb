@@ -12,10 +12,18 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <%= link_to("Home", home_index_path, class: "navebar-brand") %>
-    </nav>
+    <%= render "shared/navigation" %>
     <div class="container-fluid">
+      <% if alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+      <% if notice %>
+        <div class="alert alert-info" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   <script>

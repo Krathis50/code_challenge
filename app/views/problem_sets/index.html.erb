@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Problem Sets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Arguments</th>
+      <th>Text,</th>
+      <th>Answer</th>
+      <th>Text,</th>
+      <th>Challenge</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problem_sets.each do |problem_set| %>
+      <tr>
+        <td><%= problem_set.arguments %></td>
+        <td><%= problem_set.text, %></td>
+        <td><%= problem_set.answer %></td>
+        <td><%= problem_set.text, %></td>
+        <td><%= problem_set.challenge %></td>
+        <td><%= link_to 'Show', problem_set %></td>
+        <td><%= link_to 'Edit', edit_problem_set_path(problem_set) %></td>
+        <td><%= link_to 'Destroy', problem_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem Set', new_problem_set_path %>
