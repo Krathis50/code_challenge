@@ -1,4 +1,30 @@
-<h2>Log in</h2>
+<style>
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}
+
+input, textarea, select, .uneditable-input {
+    border: 1px solid #bbb;
+    width: 50%;
+    margin-bottom: 15px;
+    @include box_sizing;
+  }
+  
+  input {
+    height: auto !important;
+  }
+  #input.remember {
+    width: auto;
+  }
+check_box2 {
+      width: 50%;
+
+}
+</style>
+
+<center><h1>Log in</h1>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -12,15 +38,16 @@
   </div>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="check_box2">
+      <%= f.check_box :remember_me, style: 'width:auto; padding-bottom: 5px;' %>
+      <%= f.label :remember_me, style: 'width:auto; padding-bottom: 5px;' %>
     </div>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "btn  btn-primary" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</center>

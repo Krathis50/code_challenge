@@ -12,16 +12,14 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
 
+    get  "home/index"
+    post "home/submit"
     get  "login",   to: "devise/sessions#new"
     post "login",   to: "devise/sessions#create"
-    get "logout",   to: "devise/sessions#destroy"
+    delete "logout",   to: "devise/sessions#destroy"
+    
   end
 
   #root "home#index"
   resources :canvas
-
-  get  "home/index"
-  post "home/submit"
-
-
 end
