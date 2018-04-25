@@ -6,12 +6,12 @@
     <%= csrf_meta_tags %>
     <title>CodeChallenge</title>
 
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
+    
   </head>
 
   <body>
@@ -30,13 +30,7 @@
       <%= yield %>
     </div>
 <br>
-<p>
-<canvas id="canvas" width="400" height="300" style="border:1px solid #000000;">
-  </canvas>
-</p>
-<p>
-<button onclick="Square()">Square</button>
-<button onclick="Circle()">Circle</button>
+
 
 
 
@@ -54,4 +48,8 @@ $('textarea.code').each(function(i, block) {
 */
   </script>
   </body>
+
+
 </html>
+
+

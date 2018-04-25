@@ -8,4 +8,10 @@
         <%= link_to "Challenges", challenges_path, class: "nav-item nav-link" %>
     </div>
   </div>
+
+  <ul style="padding-left: 3em;" class="nav navbar-nav navbar-right">
+    <%= render 'devise/menu/registration_items' %>
+    &ensp;
+    <%= render 'devise/menu/login_items'%>
+  </ul>  
 </nav>
