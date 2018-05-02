@@ -6,7 +6,10 @@
   &ensp;
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-        <%= render 'challenges/challenges_items', class: "nav-item nav-link" %>
+        <%= link_to "Challenges", challenges_path, class: "nav-item nav-link" %>
+    </div>
+    <div class="navbar-nav">
+        <%= render 'devise/menu/admin_check' %>
     </div>
   </div>
 
