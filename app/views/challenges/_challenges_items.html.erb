@@ -1,5 +1,9 @@
-<% if user_signed_in? %>
+<% if user_signed_in?  %>
     <li>
+    <% if current_user.admin? %>
         <%= link_to "Challenges", challenges_path %>
-    </li>
+        <% else %>
+        REMOVE LATER: Checking if user is admin or default user.
+    <% end %>
+     </li>
 <% end %>
