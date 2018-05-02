@@ -1,16 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= render 'home/main_items'  %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   &ensp;
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-        <%= link_to "Challenges", challenges_path, class: "nav-item nav-link" %>
-    </div>
-    <div class="navbar-nav">
-        <%= render 'devise/menu/admin_check' %>
-    </div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <%= render 'home/main_items' %>
+        </li>
+        <li class="nav-item">
+            <a href="/challenges" class="nav-link">Challenges</a>
+        </li>
+    </ul>
   </div>
 
   <ul style="padding-left: 3em;" class="nav navbar-nav navbar-right">
