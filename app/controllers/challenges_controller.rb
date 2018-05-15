@@ -61,6 +61,14 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def submit
+    @challenge = Challenge.find(params[:challenge_id])
+    code = params[:code]
+    language = params[:language].to_sym
+    result = CodeEvaluator.evaluate_for(challenge: challenge, language: language, code: code)
+    redirect_to challenge_path(@challenge), notice: "Evaluated #{ language }. The result of the code is #{ result }"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_challenge
