@@ -1,27 +1,73 @@
+
 <style type="text/css" media="screen">
 .ace_editor {
   border: 1px solid lightgray;
+  float: left;
   margin: auto;
-  height: 200px;
-  width: 80%;
+  height: 500px;
+  width: 100%;
 }
   .scrollmargin {
     height: 80px;
     text-align: center;
   }
-</style>
-<h1>Code Challenge</h1>
 
-<%= form_tag('/home/submit') do -%>
-  <div class="form-group">
-    <label for="language">Language</label>
-    <%= select_tag(:language, options_for_select(['ruby', 'python'])) %>
+ .pos {
+   margin-top: 1%;
+    margin-right: 20%;
+  }
+
+  .pageoverflow {
+    overflow: scroll !important;
+    background-color: lightblue;
+    max-height: 600px !important;
+  }
+
+  .title-pos {
+    margin-left: 5%;
+  }
+</style>
+<center><h1>Code Challenge</h1></center>
+
+<div class="row">  
+  <div class="col-sm-2">
+      <div class="card-header w-125">
+      INSTRUCTIONS
+      </div>
+      <div class="card sm-2 box-shadow pageoverflow w-125">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec dui et felis convallis venenatis vel sed nibh. Pellentesque molestie velit molestie, consectetur eros sit amet, condimentum odio. Maecenas at pellentesque lorem. In vehicula rhoncus est eget fermentum. Fusce at tempor velit. Aliquam ex elit, faucibus eu egestas id, tempus sed nunc. Sed a neque ac ante mattis dignissim ut nec lacus. Aenean quis nunc tellus. Duis pretium, metus in vehicula mattis, lacus sapien tempus orci, sed vestibulum eros orci id mauris. Morbi dapibus vestibulum velit id imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque et dictum diam, a hendrerit sapien. Sed tincidunt, neque nec fermentum suscipit, mi tellus consequat mi, vitae congue velit velit id justo. Maecenas iaculis, velit ut bibendum commodo, magna diam viverra tellus, non gravida diam risus a massa. Donec ultrices eros in hendrerit posuere.
+
+Sed laoreet dolor non augue tincidunt sollicitudin. Integer quis leo gravida, feugiat urna quis, dictum ipsum. Nam ac sodales nisi. Sed non felis luctus, ornare enim eget, tempor nulla. Praesent id lacus ultricies, lobortis dui sed, rutrum sem. Aliquam hendrerit ultrices eros a tincidunt. In tempor mi eu malesuada dapibus. Integer odio nibh, ornare quis imperdiet eu, consectetur id lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+Proin dapibus erat mattis erat cursus commodo. Suspendisse at purus vel lectus sollicitudin fringilla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque cursus quam id ipsum dapibus, sed blandit sem sodales. Nullam a lectus tristique, bibendum lorem vitae, rhoncus sem. Aliquam erat volutpat. Proin imperdiet magna at justo facilisis, sit amet volutpat quam ultrices. Sed tellus urna, condimentum et ante sit amet, lacinia venenatis massa. Quisque faucibus hendrerit imperdiet. Sed tempus nisi magna, et mattis nibh dapibus sit amet.
+
+Maecenas tempor, urna nec dignissim vestibulum, diam quam porttitor nulla, quis lobortis dui enim id dui. Nullam ultricies ultrices mauris id imperdiet. Sed mollis diam et sapien tincidunt, sed pellentesque neque tincidunt. Quisque condimentum metus et tellus pellentesque, et convallis arcu posuere. Donec auctor purus vel magna congue, vitae consectetur urna euismod. Suspendisse pharetra non elit et finibus. Vestibulum sodales venenatis dui, sed ornare mi tincidunt sed.
+
+Fusce et sapien non enim feugiat tincidunt. Pellentesque at luctus nisi. Pellentesque eu maximus purus, sed sagittis justo. Maecenas lacus risus, semper eget blandit ut, feugiat ut tellus. Sed ornare interdum dapibus. Etiam tempus sed tortor sed cursus. In sapien diam, maximus vel sollicitudin ac, suscipit id sapien. Ut sem ex, gravida in mattis in, porttitor in diam. Nam sed dui neque. Suspendisse sed ligula neque. Praesent pellentesque felis sit amet pharetra ullamcorper. Vestibulum vehicula interdum ipsum iaculis interdum. Aenean egestas odio nec arcu posuere, ullamcorper pretium dolor commodo.
+      </div>
   </div>
-  <div class="form-group">
-    <label for="code">Write Code</label>
-    <div id="editor"></div>
-    <%= hidden_field_tag 'code', nil %>
+
+  <div class="col-sm-10">
+  <%= form_tag('/home/submit') do -%>
+
+    <div class="form-group">
+      Write Code
+      <label for="language", class="title-pos">Language</label>
+      <%= select_tag(:language, options_for_select(['ruby', 'python'])) %>
+    </div>
+
+    <div class="form-group">
+      <label for="code"></label>
+      <div id="editor"></div>
+      <%= hidden_field_tag 'code', nil %>
+    </div>
+
+    <div>
+      <%= submit_tag 'Evaluate', class: "btn btn-primary pos" %>
+    </div>
+    
+  <% end -%>
   </div>
-  <div><%= submit_tag 'Evaluate', class: "btn btn-primary" %></div>
-<% end -%>
+
+</div>
 

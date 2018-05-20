@@ -1,0 +1,9 @@
+<% if user_signed_in?  %>
+    <li>
+    <% if current_user.admin? %>
+        REMOVE LATER: You are an admin!
+        <% else %>
+        REMOVE LATER: You are not an admin.
+    <% end %>
+     </li>
+<% end %>
