@@ -7,6 +7,9 @@ class ProblemSetsController < ApplicationController
     @problem_sets = ProblemSet.all
   end
 
+  def show
+  end
+
   # GET /problem_sets/new
   def new
     challenge_id = params[:challenge_id]

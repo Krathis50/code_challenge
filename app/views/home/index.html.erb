@@ -1,3 +1,71 @@
+<%= stylesheet_link_tag "home"%>
+
+<div class="logo">
+<p> <center><%= image_tag("wtamulogo.png") %></center> </p>
+
+</div>
+<div class="row">
+  <div class="col-sm">
+      <div id="myCarousel" class="carousel slide" style="float:left;" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="image1"></div>
+            <div class="fadinggradient"></div>
+            <div class="carousel-caption">
+              <h5>Who knows.</h5>
+              <p>He went into the future.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item left">
+            <div class="image2"></div>
+            <div class="carousel-caption">
+              <h5>This man got 4th place at the contest.</h5>
+              <p>Now he's retired from contesting.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="image3"></div>
+            <div class="carousel-caption">
+              <h5>As seen in a movie.</h5>
+              <p>We'll put in java into the interpreter some day.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  </div>
+
+  <div class="col-sm-2 realborder">
+    LOREM IPSUM HERE
+  </div>
+
+  <div class="col-sm realborder">
+    LOREM IPSUM HERE
+  </div>
+
+</div>
+<!-- 
+REMOVE THIS WHEN READY.
+
 
 <style type="text/css" media="screen">
 .ace_editor {
@@ -31,19 +99,11 @@
 
 <div class="row">  
   <div class="col-sm-2">
-      <div class="card-header w-125">
+      <div class="card-header">
       INSTRUCTIONS
       </div>
-      <div class="card sm-2 box-shadow pageoverflow w-125">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec dui et felis convallis venenatis vel sed nibh. Pellentesque molestie velit molestie, consectetur eros sit amet, condimentum odio. Maecenas at pellentesque lorem. In vehicula rhoncus est eget fermentum. Fusce at tempor velit. Aliquam ex elit, faucibus eu egestas id, tempus sed nunc. Sed a neque ac ante mattis dignissim ut nec lacus. Aenean quis nunc tellus. Duis pretium, metus in vehicula mattis, lacus sapien tempus orci, sed vestibulum eros orci id mauris. Morbi dapibus vestibulum velit id imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque et dictum diam, a hendrerit sapien. Sed tincidunt, neque nec fermentum suscipit, mi tellus consequat mi, vitae congue velit velit id justo. Maecenas iaculis, velit ut bibendum commodo, magna diam viverra tellus, non gravida diam risus a massa. Donec ultrices eros in hendrerit posuere.
-
-Sed laoreet dolor non augue tincidunt sollicitudin. Integer quis leo gravida, feugiat urna quis, dictum ipsum. Nam ac sodales nisi. Sed non felis luctus, ornare enim eget, tempor nulla. Praesent id lacus ultricies, lobortis dui sed, rutrum sem. Aliquam hendrerit ultrices eros a tincidunt. In tempor mi eu malesuada dapibus. Integer odio nibh, ornare quis imperdiet eu, consectetur id lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-
-Proin dapibus erat mattis erat cursus commodo. Suspendisse at purus vel lectus sollicitudin fringilla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque cursus quam id ipsum dapibus, sed blandit sem sodales. Nullam a lectus tristique, bibendum lorem vitae, rhoncus sem. Aliquam erat volutpat. Proin imperdiet magna at justo facilisis, sit amet volutpat quam ultrices. Sed tellus urna, condimentum et ante sit amet, lacinia venenatis massa. Quisque faucibus hendrerit imperdiet. Sed tempus nisi magna, et mattis nibh dapibus sit amet.
-
-Maecenas tempor, urna nec dignissim vestibulum, diam quam porttitor nulla, quis lobortis dui enim id dui. Nullam ultricies ultrices mauris id imperdiet. Sed mollis diam et sapien tincidunt, sed pellentesque neque tincidunt. Quisque condimentum metus et tellus pellentesque, et convallis arcu posuere. Donec auctor purus vel magna congue, vitae consectetur urna euismod. Suspendisse pharetra non elit et finibus. Vestibulum sodales venenatis dui, sed ornare mi tincidunt sed.
-
-Fusce et sapien non enim feugiat tincidunt. Pellentesque at luctus nisi. Pellentesque eu maximus purus, sed sagittis justo. Maecenas lacus risus, semper eget blandit ut, feugiat ut tellus. Sed ornare interdum dapibus. Etiam tempus sed tortor sed cursus. In sapien diam, maximus vel sollicitudin ac, suscipit id sapien. Ut sem ex, gravida in mattis in, porttitor in diam. Nam sed dui neque. Suspendisse sed ligula neque. Praesent pellentesque felis sit amet pharetra ullamcorper. Vestibulum vehicula interdum ipsum iaculis interdum. Aenean egestas odio nec arcu posuere, ullamcorper pretium dolor commodo.
+      <div class="card sm-2 box-shadow pageoverflow">
+      <%= @challenges %>
       </div>
   </div>
 
@@ -71,3 +131,4 @@ Fusce et sapien non enim feugiat tincidunt. Pellentesque at luctus nisi. Pellent
 
 </div>
 
+-->

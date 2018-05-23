@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  respond_to :json
 
   # GET /challenges
   # GET /challenges.json
@@ -9,7 +10,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges/1
   # GET /challenges/1.json
-  def show
+  def show    
   end
 
   # GET /challenges/new
