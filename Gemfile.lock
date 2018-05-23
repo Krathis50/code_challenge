@@ -61,13 +61,8 @@ GEM
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.2)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
-    crass (1.0.3)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
