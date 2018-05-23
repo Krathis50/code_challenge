@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Scoreboards</h1>
+<h1>Scoreboard</h1>
 
 <table>
   <thead>
@@ -12,9 +12,8 @@
   <tbody>
     <% @scoreboards.each do |scoreboard| %>
       <tr>
-        <td><%= link_to 'Show', scoreboard %></td>
-        <td><%= link_to 'Edit', edit_scoreboard_path(scoreboard) %></td>
-        <td><%= link_to 'Destroy', scoreboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= scoreboards.name %></td>
+          <%= scoreboards.score %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +21,4 @@
 
 <br>
 
-<%= link_to 'New Scoreboard', new_scoreboard_path %>
+
