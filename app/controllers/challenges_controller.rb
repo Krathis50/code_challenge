@@ -11,6 +11,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show    
+    @challenge = Challenge.find(params[:id])
   end
 
   # GET /challenges/new
@@ -63,11 +64,24 @@ class ChallengesController < ApplicationController
   end
 
   def submit
-    @challenge = Challenge.find(params[:challenge_id])
+    # This will find the id of the challenge.
+    challenge = Challenge.find(params[:challenge_id])
+    # This will find the id of the problemset.
+    problem = ProblemSet.find(params[:challenge_id])
+    # retrieve the code that was passed in the parameter.
     code = params[:code]
     language = params[:language].to_sym
-    result = CodeEvaluator.evaluate_for(challenge: challenge, language: language, code: code)
-    redirect_to challenge_path(@challenge), notice: "Evaluated #{ language }. The result of the code is #{ result }"
+    # Evaluate the code passed in.
+    result = CodeEvaluator.evaluate_for(language, code)
+    # Here we get the answer from problem and put it into panswer.
+    panswer = problem.answer
+    if panswer == result
+      msgender = "The code was a success!"
+    else
+      msgender = "The code did not match the answer."
+    end
+
+    redirect_to challenge_path(challenge), notice: "Evaluated #{ language }. The result of the code is [ #{ result } ] #{msgender}"
   end
 
   private

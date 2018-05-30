@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
 
     get  "home/index"
-    post "home/submit"
+    post "challenges/submit"
     get  "login",   to: "devise/sessions#new"
     post "login",   to: "devise/sessions#create"
     delete "logout",   to: "devise/sessions#destroy"
