@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  respond_to :json
 
   # GET /challenges
   # GET /challenges.json
@@ -9,7 +10,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges/1
   # GET /challenges/1.json
-  def show
+  def show    
   end
 
   # GET /challenges/new
@@ -59,6 +60,14 @@ class ChallengesController < ApplicationController
       format.html { redirect_to challenges_url, notice: 'Challenge was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def submit
+    @challenge = Challenge.find(params[:challenge_id])
+    code = params[:code]
+    language = params[:language].to_sym
+    result = CodeEvaluator.evaluate_for(challenge: challenge, language: language, code: code)
+    redirect_to challenge_path(@challenge), notice: "Evaluated #{ language }. The result of the code is #{ result }"
   end
 
   private

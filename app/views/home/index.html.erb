@@ -1,27 +1,134 @@
+<%= stylesheet_link_tag "home"%>
+
+<div class="logo">
+<p> <center><%= image_tag("wtamulogo.png") %></center> </p>
+
+</div>
+<div class="row">
+  <div class="col-sm">
+      <div id="myCarousel" class="carousel slide" style="float:left;" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="image1"></div>
+            <div class="fadinggradient"></div>
+            <div class="carousel-caption">
+              <h5>Who knows.</h5>
+              <p>He went into the future.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item left">
+            <div class="image2"></div>
+            <div class="carousel-caption">
+              <h5>This man got 4th place at the contest.</h5>
+              <p>Now he's retired from contesting.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="image3"></div>
+            <div class="carousel-caption">
+              <h5>As seen in a movie.</h5>
+              <p>We'll put in java into the interpreter some day.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  </div>
+
+  <div class="col-sm-2 realborder">
+    LOREM IPSUM HERE
+  </div>
+
+  <div class="col-sm realborder">
+    LOREM IPSUM HERE
+  </div>
+
+</div>
+<!-- 
+REMOVE THIS WHEN READY.
+
+
 <style type="text/css" media="screen">
 .ace_editor {
   border: 1px solid lightgray;
+  float: left;
   margin: auto;
-  height: 200px;
-  width: 80%;
+  height: 500px;
+  width: 100%;
 }
   .scrollmargin {
     height: 80px;
     text-align: center;
   }
+
+ .pos {
+   margin-top: 1%;
+    margin-right: 20%;
+  }
+
+  .pageoverflow {
+    overflow: scroll !important;
+    background-color: lightblue;
+    max-height: 600px !important;
+  }
+
+  .title-pos {
+    margin-left: 5%;
+  }
 </style>
-<h1>Code Challenge</h1>
+<center><h1>Code Challenge</h1></center>
 
-<%= form_tag('/home/submit') do -%>
-  <div class="form-group">
-    <label for="language">Language</label>
-    <%= select_tag(:language, options_for_select(['ruby', 'python'])) %>
+<div class="row">  
+  <div class="col-sm-2">
+      <div class="card-header">
+      INSTRUCTIONS
+      </div>
+      <div class="card sm-2 box-shadow pageoverflow">
+      <%= @challenges %>
+      </div>
   </div>
-  <div class="form-group">
-    <label for="code">Write Code</label>
-    <div id="editor"></div>
-    <%= hidden_field_tag 'code', nil %>
-  </div>
-  <div><%= submit_tag 'Evaluate', class: "btn btn-primary" %></div>
-<% end -%>
 
+  <div class="col-sm-10">
+  <%= form_tag('/home/submit') do -%>
+
+    <div class="form-group">
+      Write Code
+      <label for="language", class="title-pos">Language</label>
+      <%= select_tag(:language, options_for_select(['ruby', 'python'])) %>
+    </div>
+
+    <div class="form-group">
+      <label for="code"></label>
+      <div id="editor"></div>
+      <%= hidden_field_tag 'code', nil %>
+    </div>
+
+    <div>
+      <%= submit_tag 'Evaluate', class: "btn btn-primary pos" %>
+    </div>
+    
+  <% end -%>
+  </div>
+
+</div>
+
+-->
