@@ -1,6 +1,9 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
   respond_to :json
+  usrdata = "input"
+  $result = ""
+
 
   # GET /challenges
   # GET /challenges.json
@@ -66,23 +69,38 @@ class ChallengesController < ApplicationController
   def submit
     # This will find the id of the challenge.
     challenge = Challenge.find(params[:challenge_id])
+    puts challenge
     # This will find the id of the problemset.
     problem = ProblemSet.find(params[:challenge_id])
+    puts problem
     # retrieve the code that was passed in the parameter.
     code = params[:code]
     language = params[:language].to_sym
     # Evaluate the code passed in.
-    result = CodeEvaluator.evaluate_for(language, code)
+    $result = CodeEvaluator.evaluate_for(language, code)
     # Here we get the answer from problem and put it into panswer.
     panswer = problem.answer
-    if panswer == result
+    if panswer == $result
       msgender = "The code was a success!"
     else
       msgender = "The code did not match the answer."
     end
+    puts "sleeping"
+    puts $result
 
-    redirect_to challenge_path(challenge), notice: "Evaluated #{ language }. The result of the code is [ #{ result } ] #{msgender}"
+    #redirect_to challenge_path(challenge), notice: "Evaluated #{ language }. The result of the code is [ #{ result } ] #{msgender}"
   end
+
+  def getoutput
+    puts "I'M IN HERE"
+    thedata = $result
+    puts "Outputting."
+    puts @result
+    respond_to do |format|
+      format.json {render json: thedata.to_json}
+    end
+
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
