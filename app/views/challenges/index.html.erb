@@ -21,13 +21,16 @@
       <tr >
         <td width="125"><%= link_to challenge.name, challenge  %></td>
         <td><%= challenge.description %></td>
+        <% if current_user.admin? %>
         <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
         <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Challenge', new_challenge_path %>
+<% if current_user.admin? %>
+  <%= link_to 'New Challenge', new_challenge_path %>
+<%end%>
