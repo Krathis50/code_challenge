@@ -10,6 +10,7 @@ module CodeChallenge
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.middleware.use ActionDispatch::Flash
 
     config.active_record.schema_format :sql
 
