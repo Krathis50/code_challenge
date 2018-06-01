@@ -17,7 +17,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require prism
-//= require home
 
 $(document).on('turbolinks:load', function() {
   editor.session.on('change', function(delta) {
