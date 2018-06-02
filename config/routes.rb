@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   resources :problem_sets, only: [:new, :edit, :create, :destroy]
   resources :challenges do
     post "submit" => "challenges#submit"
-    get  "submit" => "challenges#submit"
     collection do
       get '/getoutput' => 'challenges#getoutput', as: :getoutput
     end
   end
   scope module: 'challenges' do
-    get "usrOutput", to: "challenges#submit"
+    get "usrInput", to: "challenges#submit"
   end
   devise_for :users
   root "home#index"

@@ -2,9 +2,9 @@ module Evaluators
   class BaseEvaluator
     attr_reader :code, :arguments
 
-    def initialize(code, arguments: nil)
+    def initialize(code, args)
       @code = code
-      @arguments = arguments
+      @arguments = args
     end
 
     def evaluate

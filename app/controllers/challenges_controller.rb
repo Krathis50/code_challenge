@@ -1,7 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
   respond_to :json
-  usrdata = "input"
   $result = ""
 
 
@@ -9,6 +8,7 @@ class ChallengesController < ApplicationController
   # GET /challenges.json
   def index
     @challenges = Challenge.all
+    
   end
 
   # GET /challenges/1
@@ -69,7 +69,9 @@ class ChallengesController < ApplicationController
   def submit
     # This will find the id of the challenge.
     challenge = Challenge.find(params[:challenge_id])
-    puts challenge
+    puts "Testing if args got its data.".split(',')
+    usrArgs = params[:usrInput]
+    puts usrArgs
     # This will find the id of the problemset.
     problem = ProblemSet.find(params[:challenge_id])
     puts problem
@@ -77,14 +79,8 @@ class ChallengesController < ApplicationController
     code = params[:code]
     language = params[:language].to_sym
     # Evaluate the code passed in.
-    $result = CodeEvaluator.evaluate_for(language, code)
+    $result = CodeEvaluator.evaluate_for(language, code, usrArgs)
     # Here we get the answer from problem and put it into panswer.
-    panswer = problem.answer
-    if panswer == $result
-      msgender = "The code was a success!"
-    else
-      msgender = "The code did not match the answer."
-    end
     puts "sleeping"
     puts $result
 
@@ -98,7 +94,7 @@ class ChallengesController < ApplicationController
     puts @result
     respond_to do |format|
       format.json {render json: thedata.to_json}
-    end
+  end
 
 end
 

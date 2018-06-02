@@ -77,6 +77,7 @@
       <label for="language", class="title-pos">Language</label>
       <%= select_tag(:language, options_for_select(['python', 'ruby'])) %>
     </div>
+      <%= text_area_tag(:usrInput, "1,4,20,80", cols: 120, rows: 1)  %>
 
     <div class="form-group">
       <label for="code"></label>
@@ -88,7 +89,7 @@
       <%= hidden_field_tag :challenge_id, @challenge.id %>
       <%= submit_tag "Evaluate", class: "btn btn-primary ", remote: true, data: { disable_with: false }
  %>
-      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
+      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", style: "margin-left: 360px;", id: "usrSubmit", remote: true%>
     </div>
 
     
@@ -96,13 +97,8 @@
   </div>
 
 </div>
-
-
-<textarea rows="4" cols="50" name="usrInput" id="usrInput">
+<center>
+<textarea rows="4" cols="79" id="usrOutput">
 Test
 </textarea>
-
-<textarea rows="4" cols="50" id="usrOutput">
-Test
-</textarea>
-
+</center>
