@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Scoreboard</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="7"></th>
+      <th>Name    </th>
+      <th>     School    </th>
+      <th>     Score    </th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scoreboards.each do |s| %>
+      <tr>
+          <%= s.name %></td>
+          <%= s.school %></td>
+          <%= s.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

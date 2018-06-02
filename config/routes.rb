@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :scoreboards
+
   devise_for :admins
+
   resources :problem_sets, only: [:new, :edit, :create, :destroy]
   resources :challenges do
     post "submit" => "challenges#submit"
