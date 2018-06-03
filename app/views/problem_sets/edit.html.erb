@@ -1,6 +1,4 @@
 <h1>Editing Problem Set</h1>
 
 <%= render 'form', problem_set: @problem_set %>
-
-<%= link_to 'Show', @problem_set %> 
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', challenge_path(@challenge_id) %>

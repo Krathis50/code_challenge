@@ -1,19 +1,24 @@
 Rails.application.routes.draw do
-
   resources :scoreboards
-
   devise_for :admins
-
   resources :problem_sets, only: [:new, :edit, :create, :destroy]
+  resources :problem_sets do
+    post "submit" => "problem_sets"
+  end
+
+
   resources :challenges do
     post "submit" => "challenges#submit"
     collection do
-      get '/getoutput' => 'challenges#getoutput', as: :getoutput
+      get :getoutput
+      post :getoutput
     end
   end
+
   scope module: 'challenges' do
     get "usrInput", to: "challenges#submit"
   end
+
   devise_for :users
   root "home#index"
 

@@ -1,3 +1,4 @@
+<%= csrf_meta_tags %>
 <%= javascript_include_tag('challenges') %>
 
 
@@ -15,7 +16,7 @@
       <% @challenge.problem_sets.each do |problem_set| %>
         <tr>
           <th scope="row"><%= problem_set.arguments %></th>
-          <td><%= link_to "Edit", edit_problem_set_path(problem_set) %></td>
+          <td><%= link_to "Edit", edit_problem_set_path(problem_set, challenge_id: @challenge.id) %></td>
           <td><%= link_to 'Delete', problem_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
@@ -24,8 +25,6 @@
 
   <%= link_to 'New Problem Set', new_problem_set_path(challenge_id: @challenge.id) %>
 <%end%>
-<h2>Test it out</h2>
-
 <style type="text/css" media="screen">
 .ace_editor {
   border: 1px solid lightgray;
@@ -64,7 +63,8 @@
         </center>
       </div>
       <div class="card box-shadow pageoverflow">
-        <%= @challenge.description %>
+        <%= @challenge.pdescription %>
+        <%= @givenproblem.id%>
       </div>
   </div>
 
@@ -87,15 +87,13 @@
 
     <div>
       <%= hidden_field_tag :challenge_id, @challenge.id %>
+      <%= hidden_field_tag :problem_id, @givenproblem.id%>
       <%= submit_tag "Evaluate", class: "btn btn-primary ", remote: true, data: { disable_with: false }
  %>
-      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", style: "margin-left: 360px;", id: "usrSubmit", remote: true%>
     </div>
-
-    
   <% end -%>
+      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
   </div>
-
 </div>
 <center>
 <textarea rows="4" cols="79" id="usrOutput">

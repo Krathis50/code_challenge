@@ -12,12 +12,15 @@ class ProblemSetsController < ApplicationController
 
   # GET /problem_sets/new
   def new
-    challenge_id = params[:challenge_id]
-    @problem_set = ProblemSet.new(challenge_id: challenge_id)
+    @challenge_id = params[:challenge_id]
+    puts @challenge_id
+    @problem_set = ProblemSet.new(challenge_id: @challenge_id)
   end
 
   # GET /problem_sets/1/edit
   def edit
+    @challenge_id = params[:challenge_id]
+    puts @challenge_id
   end
 
   # POST /problem_sets
@@ -41,7 +44,7 @@ class ProblemSetsController < ApplicationController
   def update
     respond_to do |format|
       if @problem_set.update(problem_set_params)
-        format.html { redirect_to @problem_set, notice: 'Problem set was successfully updated.' }
+        format.html { redirect_to @problem_set.challenge, notice: 'Problem set was successfully updated.' }
         format.json { render :show, status: :ok, location: @problem_set }
       else
         format.html { render :edit }
@@ -55,7 +58,7 @@ class ProblemSetsController < ApplicationController
   def destroy
     @problem_set.destroy
     respond_to do |format|
-      format.html { redirect_to problem_sets_url, notice: 'Problem set was successfully destroyed.' }
+      format.html { redirect_to @problem_set.challenge, notice: 'Problem set was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
