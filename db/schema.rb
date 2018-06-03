@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180602233552) do
 
-  # These are extensions that must be enabled in order to support this database
-  #enable_extension "plpgsql"
-
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -24,15 +21,13 @@ ActiveRecord::Schema.define(version: 20180602233552) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    #t.inet_aton "current_sign_in_ip"
-    #t.inet_aton "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "challenges", force: :cascade do |t|
+  create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
@@ -40,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180602233552) do
     t.text "pdescription"
   end
 
-  create_table "problem_sets", force: :cascade do |t|
+  create_table "problem_sets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "arguments"
     t.string "answer"
     t.bigint "challenge_id"
@@ -49,12 +44,12 @@ ActiveRecord::Schema.define(version: 20180602233552) do
     t.index ["challenge_id"], name: "index_problem_sets_on_challenge_id"
   end
 
-  create_table "scoreboards", force: :cascade do |t|
+  create_table "scoreboards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -63,20 +58,16 @@ ActiveRecord::Schema.define(version: 20180602233552) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    #t.inet "current_sign_in_ip"
-    #t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.integer "role"
-    t.string "username"
     t.string "school"
     t.integer "score"
     t.string "team"
     t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "problem_sets", "challenges"
