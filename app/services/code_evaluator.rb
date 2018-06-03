@@ -4,8 +4,8 @@ class CodeEvaluator
     python: Evaluators::PythonEvaluator,
   }
 
-  def self.evaluate_for(language, code)
-    EVALUATOR_CLASSES[language].new(code).evaluate
+  def self.evaluate_for(language, code, args)
+    EVALUATOR_CLASSES[language].new(code, args).evaluate
   end
 
   def self.evaluate_for_challenge(challenge:, language:, code:)

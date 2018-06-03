@@ -18,7 +18,6 @@
 //= require bootstrap-sprockets
 //= require prism
 
-
 $(document).on('turbolinks:load', function() {
   editor.session.on('change', function(delta) {
     $("input#code").val(editor.getValue());

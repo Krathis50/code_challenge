@@ -1,7 +1,8 @@
 class ChallengesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  after_action :set_csrf_headers, only: :create
   respond_to :json
-  usrdata = "input"
   $result = ""
 
 
@@ -15,6 +16,9 @@ class ChallengesController < ApplicationController
   # GET /challenges/1.json
   def show    
     @challenge = Challenge.find(params[:id])
+    @givenproblem = ProblemSet.all
+    max = @givenproblem.map(&:id).max
+    @givenproblem = ProblemSet.find(rand(1..max))
   end
 
   # GET /challenges/new
@@ -69,22 +73,18 @@ class ChallengesController < ApplicationController
   def submit
     # This will find the id of the challenge.
     challenge = Challenge.find(params[:challenge_id])
-    puts challenge
+    puts "Testing if args got its data.".split(',')
+    usrArgs = params[:usrInput]
+    puts usrArgs
     # This will find the id of the problemset.
-    problem = ProblemSet.find(params[:challenge_id])
+    problem = ProblemSet.find(params[:problem_id])
     puts problem
     # retrieve the code that was passed in the parameter.
     code = params[:code]
     language = params[:language].to_sym
     # Evaluate the code passed in.
-    $result = CodeEvaluator.evaluate_for(language, code)
+    $result = CodeEvaluator.evaluate_for(language, code, usrArgs)
     # Here we get the answer from problem and put it into panswer.
-    panswer = problem.answer
-    if panswer == $result
-      msgender = "The code was a success!"
-    else
-      msgender = "The code did not match the answer."
-    end
     puts "sleeping"
     puts $result
 
@@ -98,9 +98,18 @@ class ChallengesController < ApplicationController
     puts @result
     respond_to do |format|
       format.json {render json: thedata.to_json}
-    end
+  end
 
 end
+  protected
+    def set_csrf_headers
+      if request.xhr?
+        # Add the newly created csrf token to the page headers
+        # These values are sent on 1 request only
+        response.headers['X-CSRF-Token'] = "#{form_authenticity_token}"
+        response.headers['X-CSRF-Param'] = "#{request_forgery_protection_token}"
+      end
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -110,6 +119,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def challenge_params
-      params.require(:challenge).permit(:name, :description)
+      params.require(:challenge).permit(:name, :description, :pdescription)
     end
 end

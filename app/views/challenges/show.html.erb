@@ -1,34 +1,30 @@
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
-
+<%= csrf_meta_tags %>
 <%= javascript_include_tag('challenges') %>
 
 
 
-
-<h2>Problem Sets</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Problem</th>
-      <th scope="col" colspan="2">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @challenge.problem_sets.each do |problem_set| %>
+<% if current_user.admin? %>
+  <h2>Problem Sets</h2>
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row"><%= problem_set.arguments %></th>
-        <td><%= link_to "Edit", edit_problem_set_path(problem_set) %></td>
-        <td><%= link_to 'Delete', problem_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">Problem</th>
+        <th scope="col" colspan="2">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @challenge.problem_sets.each do |problem_set| %>
+        <tr>
+          <th scope="row"><%= problem_set.arguments %></th>
+          <td><%= link_to "Edit", edit_problem_set_path(problem_set, challenge_id: @challenge.id) %></td>
+          <td><%= link_to 'Delete', problem_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Problem Set', new_problem_set_path(challenge_id: @challenge.id) %>
-
-<h2>Test it out</h2>
-
+  <%= link_to 'New Problem Set', new_problem_set_path(challenge_id: @challenge.id) %>
+<%end%>
 <style type="text/css" media="screen">
 .ace_editor {
   border: 1px solid lightgray;
@@ -67,7 +63,8 @@
         </center>
       </div>
       <div class="card box-shadow pageoverflow">
-        <%= @challenge.description %>
+        <%= @challenge.pdescription %>
+        <%= @givenproblem.id%>
       </div>
   </div>
 
@@ -80,6 +77,7 @@
       <label for="language", class="title-pos">Language</label>
       <%= select_tag(:language, options_for_select(['python', 'ruby'])) %>
     </div>
+      <%= text_area_tag(:usrInput, "1,4,20,80", cols: 120, rows: 1)  %>
 
     <div class="form-group">
       <label for="code"></label>
@@ -89,25 +87,16 @@
 
     <div>
       <%= hidden_field_tag :challenge_id, @challenge.id %>
+      <%= hidden_field_tag :problem_id, @givenproblem.id%>
       <%= submit_tag "Evaluate", class: "btn btn-primary ", remote: true, data: { disable_with: false }
  %>
-      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
     </div>
-
-    
   <% end -%>
+      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
   </div>
-
 </div>
-
-
-<textarea rows="4" cols="50" name="usrInput" id="usrInput">
+<center>
+<textarea rows="4" cols="79" id="usrOutput">
 Test
 </textarea>
-
-<textarea rows="4" cols="50" id="usrOutput">
-Test
-<%= @usrdata %>
-
-</textarea>
-
+</center>
