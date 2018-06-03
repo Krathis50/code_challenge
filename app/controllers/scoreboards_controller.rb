@@ -4,7 +4,7 @@ class ScoreboardsController < ApplicationController
   # GET /scoreboards
   # GET /scoreboards.json
   def index
-    @scoreboards = Scoreboard.all
+    @users = Scoreboard.all
   end
 
   # GET /scoreboards/1

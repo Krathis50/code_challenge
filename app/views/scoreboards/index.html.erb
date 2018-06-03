@@ -2,19 +2,20 @@
 
 <h1>Scoreboard</h1>
 
-<table>
+
+  <table cellpadding="10" class="table-bordered table-striped">
   <thead>
     <tr>
-      <th colspan="7"></th>
-      <th>Name    </th>
-      <th>     School    </th>
-      <th>     Score    </th>
+      
+      <th>  Name  </th>
+      <th>  School  </th>
+      <th>  Score  </th>
       
     </tr>
   </thead>
 
   <tbody>
-    <% @scoreboards.each do |s| %>
+    <% @users.each do |s| %>
       <tr>
           <%= s.name %></td>
           <%= s.school %></td>
