@@ -4,12 +4,13 @@ class ScoreboardsController < ApplicationController
   # GET /scoreboards
   # GET /scoreboards.json
   def index
-    @users = Scoreboard.all
+    @scoreboard = Scoreboard.all
   end
 
   # GET /scoreboards/1
   # GET /scoreboards/1.json
   def show
+    @scoreboard = Scoreboard.all
   end
 
   # GET /scoreboards/new
@@ -69,6 +70,6 @@ class ScoreboardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scoreboard_params
-      params.fetch(:scoreboard, {})
+      params.require(:scoreboard).permit(:scoreboard_name,:scoreboard_school,:scoreboard_score)
     end
 end
