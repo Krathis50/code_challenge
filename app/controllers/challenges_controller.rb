@@ -1,6 +1,7 @@
 class ChallengesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   after_action :set_csrf_headers, only: :create
   respond_to :json
   $result = ""

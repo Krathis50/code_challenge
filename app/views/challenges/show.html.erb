@@ -1,5 +1,6 @@
 <%= csrf_meta_tags %>
 <%= javascript_include_tag('challenges') %>
+<%= stylesheet_link_tag('challenges') %>
 
 
 
@@ -25,34 +26,7 @@
 
   <%= link_to 'New Problem Set', new_problem_set_path(challenge_id: @challenge.id) %>
 <%end%>
-<style type="text/css" media="screen">
-.ace_editor {
-  border: 1px solid lightgray;
-  float: left;
-  margin: auto;
-  height: 500px;
-  width: 100%;
-}
-  .scrollmargin {
-    height: 80px;
-    text-align: center;
-  }
 
- .pos {
-   margin-top: 1%;
-    margin-right: 20%;
-  }
-
-  .pageoverflow {
-    background-color: lightblue;
-    max-height: 550px !important;
-    overflow-y: auto;
-  }
-
-  .title-pos {
-    margin-left: 5%;
-  }
-</style>
 <center><h1>Code Challenge</h1></center>
 
 <div class="row">  

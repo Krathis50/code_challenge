@@ -1,3 +1,30 @@
 // Place all the styles related to the challenges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.ace_editor {
+    border: 1px solid lightgray;
+    float: left;
+    margin: auto;
+    height: 500px;
+    width: 100%;
+  }
+.scrollmargin {
+    height: 80px;
+    text-align: center;
+}
+
+.pos {
+    margin-top: 1%;
+    margin-right: 20%;
+}
+
+.pageoverflow {
+    background-color: lightblue;
+    max-height: 550px !important;
+    overflow-y: auto;
+    height:     550px;
+}
+
+.title-pos {
+    margin-left: 5%;
+}
