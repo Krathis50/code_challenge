@@ -38,7 +38,6 @@
       </div>
       <div class="card box-shadow pageoverflow">
         <%= @challenge.pdescription %>
-        <%= @givenproblem.id%>
       </div>
   </div>
 
@@ -49,9 +48,9 @@
     <div class="form-group">
       Write Code
       <label for="language", class="title-pos">Language</label>
-      <%= select_tag(:language, options_for_select(['python', 'ruby'])) %>
+      <%= select_tag(:language, options_for_select(['python'])) %>
     </div>
-      <%= text_area_tag(:usrInput, "1,4,20,80", cols: 120, rows: 1)  %>
+      <%= text_area_tag(:usrInput, "", cols: 120, rows: 1, placeholder: "Inputs here. Multiple inputs example: 1,20,40,60 without spaces in between commas " )  %>
 
     <div class="form-group">
       <label for="code"></label>
@@ -66,11 +65,14 @@
  %>
     </div>
   <% end -%>
-      <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
+  <%= @user_result%>
+  <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
+  <%= hidden_field_tag :user_id, @current_user %>
+  <%= button_to "Submit", submit_score_challenges_path, class: "btn", remote: true%>
+
   </div>
 </div>
 <center>
-<textarea rows="4" cols="79" id="usrOutput">
-Test
+<textarea rows="4" cols="79" id="usrOutput" placeholder="Output will generate here.">
 </textarea>
 </center>

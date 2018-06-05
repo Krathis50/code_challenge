@@ -5,12 +5,16 @@ class ScoreboardsController < ApplicationController
   # GET /scoreboards.json
   def index
     @scoreboard = Scoreboard.all
+    @users = User.all
+
   end
 
   # GET /scoreboards/1
   # GET /scoreboards/1.json
   def show
     @scoreboard = Scoreboard.all
+    @users = User.all
+
   end
 
   # GET /scoreboards/new
