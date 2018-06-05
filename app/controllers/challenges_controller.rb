@@ -1,10 +1,9 @@
 class ChallengesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   after_action :set_csrf_headers, only: :create
   respond_to :json
-  $result = ""
-
 
   # GET /challenges
   # GET /challenges.json
@@ -18,7 +17,13 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @givenproblem = ProblemSet.all
     max = @givenproblem.map(&:id).max
-    @givenproblem = ProblemSet.find(rand(1..max))
+    if max != nil
+      @givenproblem = ProblemSet.find(rand(1..max))
+    else
+    end
+    @current_user ||= User.find_by(id: session[:user_id])
+    session[:usercode] = ""
+    session[:userinputcode] = ""
   end
 
   # GET /challenges/new
@@ -73,31 +78,43 @@ class ChallengesController < ApplicationController
   def submit
     # This will find the id of the challenge.
     challenge = Challenge.find(params[:challenge_id])
-    puts "Testing if args got its data.".split(',')
+    #puts "Testing if args got its data.".split(',')
     usrArgs = params[:usrInput]
-    puts usrArgs
+    #puts usrArgs
     # This will find the id of the problemset.
     problem = ProblemSet.find(params[:problem_id])
-    puts problem
+    #puts problem
     # retrieve the code that was passed in the parameter.
     code = params[:code]
+    session[:userinputcode] = code
     language = params[:language].to_sym
     # Evaluate the code passed in.
-    $result = CodeEvaluator.evaluate_for(language, code, usrArgs)
+    session[:usercode] = CodeEvaluator.evaluate_for(language, code, usrArgs)
     # Here we get the answer from problem and put it into panswer.
-    puts "sleeping"
-    puts $result
+    #puts "sleeping"
+    #puts session[:usercode]
 
     #redirect_to challenge_path(challenge), notice: "Evaluated #{ language }. The result of the code is [ #{ result } ] #{msgender}"
   end
 
   def getoutput
-    puts "I'M IN HERE"
-    thedata = $result
-    puts "Outputting."
-    puts @result
+    thedata = session[:usercode]
     respond_to do |format|
       format.json {render json: thedata.to_json}
+  end
+
+  def submit_score 
+    #puts "Submitting user score."
+    @current_user ||= User.find_by(params[:user_id])
+    @problem_answer = ProblemSet.find_by(params[:problem_id])
+    puts @problem_answer.answer
+    if session[:usercode] == @problem_answer.answer
+      score = 10 + @current_user.scoreboard_score.to_i
+      #puts score
+      @current_user.update_attributes(scoreboard_score: score.to_s)
+    else 
+      puts "User answer did not match problem"
+    end
   end
 
 end

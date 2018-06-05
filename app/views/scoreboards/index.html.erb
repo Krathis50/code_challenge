@@ -15,13 +15,13 @@
   </thead>
 
   <tbody>
-    <% @scoreboard.each do |s| %>
+      <% @users.each do |s| %>
       <tr>
-          <%= s.name %></td>
-          <%= s.school %></td>
-          <%= s.score %></td>
+          <td><%= s.scoreboard_name %></td>
+          <td><%= s.scoreboard_school %></td>
+          <td><%= s.scoreboard_score %></td>
       </tr>
-    <% end %>
+      <%end%>
   </tbody>
 </table>
 

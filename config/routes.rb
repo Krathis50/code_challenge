@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     collection do
       get :getoutput
       post :getoutput
+      get :submit_score
+      post :submit_score
     end
   end
 
