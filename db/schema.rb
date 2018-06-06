@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603192359) do
+ActiveRecord::Schema.define(version: 20180604041806) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 20180603192359) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.integer "role"
+    t.string "scoreboard_name"
+    t.string "scoreboard_school"
+    t.string "scoreboard_score"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
