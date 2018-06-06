@@ -11,7 +11,7 @@ module CodeChallenge
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.middleware.use ActionDispatch::Flash
-
+    config.action_dispatch.perform_deep_munge = false
     config.active_record.schema_format :sql
 
     # Settings in config/environments/* take precedence over those specified here.

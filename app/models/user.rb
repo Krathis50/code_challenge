@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  serialize :scoreboard_score, Array
 
   def set_default_role
     self.role ||= :user

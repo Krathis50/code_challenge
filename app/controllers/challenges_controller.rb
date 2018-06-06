@@ -4,6 +4,7 @@ class ChallengesController < ApplicationController
   before_action :authenticate_user!
   after_action :set_csrf_headers, only: :create
   respond_to :json
+  
 
   # GET /challenges
   # GET /challenges.json
@@ -21,9 +22,10 @@ class ChallengesController < ApplicationController
       @givenproblem = ProblemSet.find(rand(1..max))
     else
     end
-    @current_user ||= User.find_by(id: session[:user_id])
     session[:usercode] = ""
     session[:userinputcode] = ""
+    session[:usertimeonpage] = Time.now.strftime("%H:%M:%S")
+    session[:usersubmittime] = ""
   end
 
   # GET /challenges/new
@@ -76,6 +78,7 @@ class ChallengesController < ApplicationController
   end
 
   def submit
+    session[:usersubmittime] = Time.now.strftime("%H:%M:%S")
     # This will find the id of the challenge.
     challenge = Challenge.find(params[:challenge_id])
     #puts "Testing if args got its data.".split(',')
@@ -103,15 +106,33 @@ class ChallengesController < ApplicationController
       format.json {render json: thedata.to_json}
   end
 
-  def submit_score 
-    #puts "Submitting user score."
-    @current_user ||= User.find_by(params[:user_id])
+  def submit_score
+    user_time_start = session[:usertimeonpage]
+    user_time_submit = session[:usersubmittime] 
+    user_time_start = user_time_start.tr(':', '')
+    user_time_submit = user_time_submit.tr(':', '')
+    user_code = session[:usercode].split("\n").last
+    puts user_code
+
+    
+
+    user_time = user_time_submit.to_i - user_time_start.to_i
+    @current_user = current_user
     @problem_answer = ProblemSet.find_by(params[:problem_id])
-    puts @problem_answer.answer
+    @challenge = Challenge.find_by(params[:challenge_id])
+    c_id = @challenge.id
     if session[:usercode] == @problem_answer.answer
-      score = 10 + @current_user.scoreboard_score.to_i
-      #puts score
-      @current_user.update_attributes(scoreboard_score: score.to_s)
+      user_time = user_time/3
+      if user_time == 0
+        user_time = 1
+      end
+      score = 1000/user_time
+      if score < 30
+        score = 30
+      end
+      @current_user.scoreboard_score[c_id] = score
+      puts @current_user.scoreboard_score[c_id]
+      @current_user.save 
     else 
       puts "User answer did not match problem"
     end

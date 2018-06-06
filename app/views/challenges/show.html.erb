@@ -37,7 +37,7 @@
         </center>
       </div>
       <div class="card box-shadow pageoverflow">
-        <%= @challenge.pdescription %>
+        <%= @challenge.pdescription.html_safe %>
       </div>
   </div>
 
@@ -67,7 +67,6 @@
   <% end -%>
   <%= @user_result%>
   <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
-  <%= hidden_field_tag :user_id, @current_user %>
   <%= button_to "Submit", submit_score_challenges_path, class: "btn", remote: true%>
 
   </div>

@@ -6,7 +6,25 @@ class ScoreboardsController < ApplicationController
   def index
     @scoreboard = Scoreboard.all
     @users = User.all
-
+    @printscore = 0
+    i = 0
+    @users.each do |s| 
+      puts "printing user id"
+      puts s.id
+      max = s.scoreboard_score
+      while i <= max.length
+          addthis = s.scoreboard_score[i+1].to_s
+          #puts "printing addthis"
+          #puts s.scoreboard_score[i+1].to_s
+          addthis = addthis.to_i
+          #puts addthis
+          @printscore = addthis + @printscore
+          i += 1
+      end
+      s.update_attribute(:print_score, @printscore.to_s)
+      @printscore = 0
+      i=0
+    end
   end
 
   # GET /scoreboards/1
@@ -14,6 +32,11 @@ class ScoreboardsController < ApplicationController
   def show
     @scoreboard = Scoreboard.all
     @users = User.all
+    max = Challenge.map(&:id).max
+
+    for i in max do
+      puts i
+    end
 
   end
 
