@@ -1,3 +1,5 @@
+include Devise::Controllers::Helpers
+
 class ScoreboardsController < ApplicationController
   before_action :set_scoreboard, only: [:show, :edit, :update, :destroy]
 
