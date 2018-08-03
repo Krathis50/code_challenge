@@ -1,4 +1,4 @@
-class CodeEvaluator
+class CodeEvaluator < ApplicationController
   EVALUATOR_CLASSES = {
     ruby: Evaluators::RubyEvaluator,
     python: Evaluators::PythonEvaluator,

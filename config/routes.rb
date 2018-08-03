@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   resources :scoreboards
   devise_for :admins
   resources :problem_sets, only: [:new, :edit, :create, :destroy]
@@ -9,11 +10,13 @@ Rails.application.routes.draw do
 
   resources :challenges do
     post "submit" => "challenges#submit"
+    post :updateoutput
     collection do
       get :getoutput
       post :getoutput
-      get :submit_score
       post :submit_score
+
+      post :updateoutput
     end
   end
 

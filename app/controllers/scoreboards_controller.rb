@@ -1,4 +1,4 @@
-include Devise::Controllers::Helpers
+  include Devise::Controllers::Helpers
 
 class ScoreboardsController < ApplicationController
   before_action :set_scoreboard, only: [:show, :edit, :update, :destroy]
@@ -11,8 +11,8 @@ class ScoreboardsController < ApplicationController
     @printscore = 0
     i = 0
     @users.each do |s| 
-      puts "printing user id"
-      puts s.id
+      #puts "printing user id"
+      #puts s.id
       max = s.scoreboard_score
       while i <= max.length
           addthis = s.scoreboard_score[i+1].to_s

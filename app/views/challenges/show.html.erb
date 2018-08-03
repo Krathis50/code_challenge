@@ -1,7 +1,8 @@
 <%= csrf_meta_tags %>
+<%= action_cable_meta_tag %>
 <%= javascript_include_tag('challenges') %>
 <%= stylesheet_link_tag('challenges') %>
-
+<%= javascript_include_tag('xterm') %>
 
 
 <% if current_user.admin? %>
@@ -61,17 +62,15 @@
     <div>
       <%= hidden_field_tag :challenge_id, @challenge.id %>
       <%= hidden_field_tag :problem_id, @givenproblem.id%>
-      <%= submit_tag "Evaluate", class: "btn btn-primary ", remote: true, data: { disable_with: false }
- %>
+      <%= submit_tag "Evaluate", class: "btn btn-primary ", remote: true, data: { disable_with: false } %>
     </div>
   <% end -%>
-  <%= @user_result%>
-  <%= button_to "Refresh Console", getoutput_challenges_path, class: "btn", id: "usrSubmit", remote: true%>
+  <%= @user_result %>
   <%= button_to "Submit", submit_score_challenges_path, class: "btn", remote: true%>
 
   </div>
 </div>
 <center>
-<textarea rows="4" cols="79" id="usrOutput" placeholder="Output will generate here.">
 </textarea>
+      <div id="terminal"></div>
 </center>

@@ -1,16 +1,17 @@
 require 'open3'
+require 'readline'
 
 module Evaluators
   class PythonEvaluator < Evaluators::BaseEvaluator
     def evaluate
       program = ""
       tostring = @code
+      current_user = @user
       tostring = tostring.to_s
-      #lul = tostring.scan(/input/).count
-      #puts lul
       something =  @arguments.split(",").map(&:to_i)
       puts something[0]
-      
+      fug = ""
+
       Open3.popen3( "python3 -c '#{@code}'" ) do |stdin, stdout, stderr, watch|
         something.each do |i|
           stdin.puts(i)
@@ -26,9 +27,6 @@ module Evaluators
       end
       puts program
       program.strip
-
-        #program = `python3 -c '#{ @something }'`
-        #program.strip 
     end
   end
 end

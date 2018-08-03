@@ -82,8 +82,29 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: code_challenge
+  host: localhost
+  pool: 5
+  username: root
+  password: asdzxc  
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: code_challenge_test
+  host: localhost
+  pool: 5
+  username: root
+  password: asdzxc  
+
+  production:
+  adapter: mysql2
+  encoding: utf8
   database: code_challenge_production
-  username: code_challenge
-  password: <%= ENV['CODE_CHALLENGE_DATABASE_PASSWORD'] %>
+  host: localhost
+  pool: 5
+  username: root
+  password: asdzxc  

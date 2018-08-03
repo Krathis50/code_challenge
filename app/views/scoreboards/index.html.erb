@@ -1,25 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Scoreboard</h1>
+<center><h1>LEADERBOARD</h1></center>
 
-
-  <table cellpadding="10" class="table-bordered table-striped">
+  <table id="test" class="table-bordered table-striped table" >
   <thead>
     <tr>
-      
-      <th>  Name  </th>
-      <th>  School  </th>
-      <th>  Score  </th>
-      
+      <th class="w-1">Rank</th>   
+      <th class="w-50">Name</th>
+      <th class="w-50">School</th>
+      <th class="w-1">Score</th>
     </tr>
   </thead>
 
   <tbody>
-      <% @users.each do |s| %>
-      <tr>
-          <td><%= s.scoreboard_name %></td>
-          <td><%= s.scoreboard_school %></td>
-          <td><%= s.print_score %></td>
+      <% @users.order(:print_score).reverse_order.each do |s|  %>
+      <tr> 
+          <td align="center" > # </td>
+          <td ><%= s.scoreboard_name %></td>
+          <td ><%= s.scoreboard_school %></td>
+          <td ><%= s.print_score %></td>
       </tr>
       <%end%>
   </tbody>
@@ -27,3 +26,10 @@
 
 <br>
 
+<script>
+ var tableRef = document.getElementsByTagName("tr");
+// console.log(tableRef.length);
+for (var i = 1; i < tableRef.length; ++i) {
+      tableRef[i].cells["0"].innerText = i;
+}
+</script>

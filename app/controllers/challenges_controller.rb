@@ -1,3 +1,6 @@
+require 'open3'
+require 'readline'
+
 class ChallengesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
@@ -18,6 +21,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @givenproblem = ProblemSet.all
     max = @givenproblem.map(&:id).max
+    @curOut = ''
     if max != nil
       @givenproblem = ProblemSet.find(rand(1..max))
     else
@@ -26,6 +30,7 @@ class ChallengesController < ApplicationController
     session[:userinputcode] = ""
     session[:usertimeonpage] = Time.now.strftime("%H:%M:%S")
     session[:usersubmittime] = ""
+    session[:testing] = ""
   end
 
   # GET /challenges/new
@@ -94,16 +99,22 @@ class ChallengesController < ApplicationController
     # Evaluate the code passed in.
     session[:usercode] = CodeEvaluator.evaluate_for(language, code, usrArgs)
     # Here we get the answer from problem and put it into panswer.
-    #puts "sleeping"
-    #puts session[:usercode]
-
+    puts "sleeping"
+    puts session[:usercode]
+    ActionCable.server.broadcast "userchannel_#{current_user.id}", session[:usercode]
     #redirect_to challenge_path(challenge), notice: "Evaluated #{ language }. The result of the code is [ #{ result } ] #{msgender}"
   end
 
   def getoutput
-    thedata = session[:usercode]
-    respond_to do |format|
-      format.json {render json: thedata.to_json}
+    thedata = session[:testing]
+    puts session[:testing]
+    puts thedata
+    user = current_user
+  end
+
+  def updateoutput 
+    session[:testing] = params[:body]
+    puts session[:testing]
   end
 
   def submit_score
@@ -113,9 +124,6 @@ class ChallengesController < ApplicationController
     user_time_submit = user_time_submit.tr(':', '')
     user_code = session[:usercode].split("\n").last
     puts user_code
-
-    
-
     user_time = user_time_submit.to_i - user_time_start.to_i
     @current_user = current_user
     @problem_answer = ProblemSet.find_by(params[:problem_id])
@@ -137,8 +145,7 @@ class ChallengesController < ApplicationController
       puts "User answer did not match problem"
     end
   end
-
-end
+  
   protected
     def set_csrf_headers
       if request.xhr?

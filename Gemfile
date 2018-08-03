@@ -57,3 +57,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Added at 2018-06-24 21:00:17 -0500 by root:
+gem "httparty", "~> 0.16.2"
+
+# Added at 2018-07-18 20:12:10 -0500 by root:
+gem "websocket-rails", "~> 0.7.0"
+
+# Added at 2018-07-18 21:06:45 -0500 by root:
+gem "redis", "~> 4.0"
+
+# Added at 2018-07-19 02:42:22 -0500 by root:
+gem "rack-cors", "~> 1.0"
